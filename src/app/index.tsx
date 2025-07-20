@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
 import { View } from "react-native";
 import { Button } from "../components/ui/button";
@@ -19,7 +20,11 @@ export default function Index() {
   })
 
   const handleLogin = handleSubmit((data) => {
-    console.log(data);
+    const {username, password} = data;
+
+    if (username === "admin" && password === "admin") {
+      router.navigate("/dashboard")
+    }
   });
 
   return (
@@ -39,7 +44,7 @@ export default function Index() {
                 render={({ field: { onChange, onBlur, value } }) => (
                   <Input
                     placeholder="Username"
-                    onChange={onChange}
+                    onChangeText={onChange}
                     onBlur={onBlur}
                     value={value}
                   />
@@ -54,7 +59,7 @@ export default function Index() {
                 render={({ field: { onChange, onBlur, value } }) => (
                   <Input
                     placeholder="Password"
-                    onChange={onChange}
+                    onChangeText={onChange}
                     onBlur={onBlur}
                     value={value}
                     secureTextEntry
