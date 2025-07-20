@@ -1,12 +1,15 @@
-import '../styles/global.css';
-
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
+import { SQLiteProvider } from 'expo-sqlite';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform } from 'react-native';
+
+import { initializeDatabase } from '../database/initializeDatabase';
 import { NAV_THEME } from '../lib/constants';
 import { useColorScheme } from '../lib/useColorScheme';
+
+import '../styles/global.css';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -43,10 +46,12 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <Stack screenOptions={{ headerShown: false }} />
-    </ThemeProvider>
+    <SQLiteProvider databaseName='locker-app.db' onInit={initializeDatabase}>
+      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+        <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+        <Stack screenOptions={{ headerShown: false }} />
+      </ThemeProvider>
+    </SQLiteProvider>
   );
 }
 
