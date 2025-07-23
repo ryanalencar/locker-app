@@ -23,8 +23,8 @@ export default function Index() {
     const {username, password} = data;
 
     if (username === "admin" && password === "admin") {
-      router.navigate("/dashboard")
     }
+    router.navigate("/dashboard")
   });
 
   return (

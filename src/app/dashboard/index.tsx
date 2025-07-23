@@ -49,19 +49,13 @@ export default function Dashboard() {
           </Link>
         </View>
 
-        <View>
-          <Link href="/manage-users">
-            <Card
-              className="h-auto transition-all hover:shadow-md border-l-4 border-primary"
-            >
-              <CardHeader>
-                <User color='black' />
-                <CardTitle className="mt-4">Gerenciar Usuários</CardTitle>
-                <CardDescription>Cadastre e gerencie usuários dos armários</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-        </View>
+        <Card onTouchEnd={() => router.navigate('/manage-users')} className="w-full shadow-md h-auto transition-all hover:shadow-md border-l-4 border-primary">
+          <CardHeader>
+            <User color='black' />
+            <CardTitle className="mt-4">Gerenciar Usuários</CardTitle>
+            <CardDescription>Cadastre e gerencie usuários dos armários</CardDescription>
+          </CardHeader>
+        </Card>
 
       </View>
     </View>

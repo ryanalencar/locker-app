@@ -1,11 +1,14 @@
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
+import { PortalHost } from '@rn-primitives/portal';
+import { drizzle } from 'drizzle-orm/expo-sqlite';
+import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import { Stack } from 'expo-router';
-import { SQLiteProvider } from 'expo-sqlite';
+import { openDatabaseSync, SQLiteProvider } from 'expo-sqlite';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform } from 'react-native';
 
-import { initializeDatabase } from '../database/initializeDatabase';
+import migrations from '../../drizzle/migrations';
 import { NAV_THEME } from '../lib/constants';
 import { useColorScheme } from '../lib/useColorScheme';
 
@@ -24,7 +27,13 @@ export {
   ErrorBoundary
 } from 'expo-router';
 
+export const DATABASE_NAME = 'locker-app-v1.db';
+
 export default function RootLayout() {
+  const expoDb = openDatabaseSync(DATABASE_NAME)
+  const db = drizzle(expoDb)
+  const { success, error } = useMigrations(db, migrations);
+
   const hasMounted = React.useRef(false);
   const { colorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
@@ -46,12 +55,15 @@ export default function RootLayout() {
   }
 
   return (
-    <SQLiteProvider databaseName='locker-app.db' onInit={initializeDatabase}>
-      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-        <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-        <Stack screenOptions={{ headerShown: false }} />
-      </ThemeProvider>
-    </SQLiteProvider>
+    <React.Suspense>
+      <SQLiteProvider databaseName={DATABASE_NAME} options={{ enableChangeListener: true, }} useSuspense>
+        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+          <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+          <Stack screenOptions={{ headerShown: false }} />
+          <PortalHost />
+        </ThemeProvider>
+      </SQLiteProvider>
+    </React.Suspense>
   );
 }
 
