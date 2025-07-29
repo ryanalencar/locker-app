@@ -1,5 +1,5 @@
 import { Link, router } from "expo-router";
-import { DoorOpen, LogOut, Settings, User } from "lucide-react-native";
+import { DoorOpen, LogOut, User } from "lucide-react-native";
 import { View } from "react-native";
 import { Button } from "~/src/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "~/src/components/ui/card";
@@ -19,12 +19,6 @@ export default function Dashboard() {
             <Text className="text-2xl font-bold">Locker App</Text>
           </View>
           <View className="flex flex-row items-center gap-3">
-            <Link href="/admin-settings">
-              <Button variant="outline" size="icon" className="h-10 w-10">
-                <Settings className="h-5 w-5" />
-                <Text className="sr-only">Configurações</Text>
-              </Button>
-            </Link>
             <Button variant="ghost" size="icon" className="h-10 w-10" onPress={handleLogout}>
               <LogOut className="h-5 w-5" />
               <Text className="sr-only">Sair</Text>

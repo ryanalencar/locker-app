@@ -68,7 +68,7 @@ export default function ManageUsers() {
   return (
     <>
       <ScrollView bounces={false} className="min-h-full bg-gray-50 py-10">
-        <Header title="Gerenciar Usuários" subtitle="Adicione, edite e remova usuários do sistema" href="/dashboard" />
+        <Header title="Gerenciar Usuários" subtitle="Adicione, edite e remova usuários do sistema" />
         <View className="flex flex-col px-6 gap-4">
           <Button
             onPress={openAddUserDialog}

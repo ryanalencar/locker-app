@@ -7,24 +7,19 @@ import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Text } from "../components/ui/text";
 
+interface LockerFormData {
+  registration: string;
+}
+
 export default function Index() {
   const {
     control,
     handleSubmit,
     formState: { errors, isLoading },
-  } = useForm({
-    defaultValues: {
-      username: "",
-      password: "",
-    },
-  })
+  } = useForm<LockerFormData>({})
 
-  const handleLogin = handleSubmit((data) => {
-    const {username, password} = data;
+  const handleOpenLocker = handleSubmit((data) => {
 
-    if (username === "admin" && password === "admin") {
-    }
-    router.navigate("/dashboard")
   });
 
   return (
@@ -37,40 +32,29 @@ export default function Index() {
         <CardContent className="p-6">
           <View className="flex flex-col gap-4">
             <View>
-              <Label nativeID='username'>Username</Label>
+              <Label nativeID='registration'>Matrícula</Label>
               <Controller
                 control={control}
-                name="username"
+                name="registration"
                 render={({ field: { onChange, onBlur, value } }) => (
                   <Input
-                    placeholder="Username"
+                    placeholder="Matrícula"
                     onChangeText={onChange}
                     onBlur={onBlur}
                     value={value}
-                  />
-                )}
-              />
-            </View>
-            <View>
-              <Label nativeID='password'>Password</Label>
-              <Controller
-                control={control}
-                name="password"
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <Input
-                    placeholder="Password"
-                    onChangeText={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                    secureTextEntry
                   />
                 )}
               />
             </View>
 
-            <Button onPress={handleLogin}>
+            <Button onPress={handleOpenLocker}>
               <Text>
-                {isLoading ? "Autenticando..." : "Entrar"}
+                {isLoading ? "Abrindo Armário..." : "Abrir Armário"}
+              </Text>
+            </Button>
+            <Button variant="secondary" onPress={() => router.navigate('/admin-login')}>
+              <Text>
+                Acessar painel admin
               </Text>
             </Button>
           </View>
