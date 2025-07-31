@@ -15,7 +15,7 @@ import { Text } from "~/src/components/ui/text";
 import { useDatabase } from "~/src/hooks/use-database";
 import { cn } from '~/src/lib/utils';
 
-const MIN_COLUMN_WIDTHS = [120, 120, 100, 120, 120];
+const MIN_COLUMN_WIDTHS = [120, 120, 100, 120];
 
 export default function ManageUsers() {
   const { width } = useWindowDimensions();
@@ -88,7 +88,7 @@ export default function ManageUsers() {
               <Table aria-labelledby='users-table'>
                 <TableHeader>
                   <TableRow>
-                    <TableHead style={{ width: columnWidths[0] }}>
+                    <TableHead style={{ width: 80 }}>
                       <Text>Nome</Text>
                     </TableHead>
                     <TableHead style={{ width: columnWidths[1] }}>
@@ -96,9 +96,6 @@ export default function ManageUsers() {
                     </TableHead>
                     <TableHead style={{ width: columnWidths[2] }}>
                       <Text>Matrícula</Text>
-                    </TableHead>
-                    <TableHead style={{ width: columnWidths[3] }}>
-                      <Text>Armário</Text>
                     </TableHead>
                     <TableHead style={{ width: columnWidths[4] }}>
                       <Text>Ações</Text>
@@ -118,7 +115,7 @@ export default function ManageUsers() {
                         return (
                           <TableRow className={cn('active:bg-secondary', index % 2 && 'bg-muted/40 ')}
                             key={user.id}>
-                            <TableCell style={{ width: columnWidths[0] }}>
+                            <TableCell style={{ width: 80 }}>
                               <Text>{user.name}</Text>
                             </TableCell>
                             <TableCell style={{ width: columnWidths[1] }}>
@@ -126,9 +123,6 @@ export default function ManageUsers() {
                             </TableCell>
                             <TableCell style={{ width: columnWidths[2] }}>
                               <Text>{user.registration}</Text>
-                            </TableCell>
-                            <TableCell style={{ width: columnWidths[3] }}>
-                              <Text>{user.locker_id}</Text>
                             </TableCell>
                             <TableCell style={{ width: columnWidths[4] }} className='flex-1 flex-row gap-2'>
                               <Button size='icon' variant="outline" onPress={() => openEditUserDialog(user)}>

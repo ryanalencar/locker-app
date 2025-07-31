@@ -27,7 +27,7 @@ export {
   ErrorBoundary
 } from 'expo-router';
 
-export const DATABASE_NAME = 'locker-app-v1.db';
+export const DATABASE_NAME = 'locker-app-v1.1.db';
 
 export default function RootLayout() {
   const expoDb = openDatabaseSync(DATABASE_NAME)

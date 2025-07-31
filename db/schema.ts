@@ -5,7 +5,18 @@ export const users = sqliteTable("users", {
   name: text("name"),
   username: text("username").notNull().unique(),
   registration: text("registration").notNull().unique(),
-  locker_id: text("locker_id").notNull().unique(),
+})
+
+export const lockers = sqliteTable("lockers", {
+  id: integer("id").primaryKey({autoIncrement: true}),
+  user_id: integer("user_id").notNull().references(() => users.id),
+  status: text("status").notNull().default("available"),
 })
 
 export type User = typeof users.$inferSelect;
+export type Locker = typeof lockers.$inferSelect;
+export enum LockerStatus {
+  AVAILABLE = "available", 
+  OCCUPIED = "occupied",
+  MAINTENANCE = "maintenance"
+}

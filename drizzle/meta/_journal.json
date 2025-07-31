@@ -15,6 +15,27 @@
       "when": 1753293199250,
       "tag": "0001_bumpy_saracen",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1753817002503,
+      "tag": "0002_shallow_captain_cross",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1753817116179,
+      "tag": "0003_massive_magneto",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1753817235978,
+      "tag": "0004_reflective_mister_fear",
+      "breakpoints": true
     }
   ]
 }

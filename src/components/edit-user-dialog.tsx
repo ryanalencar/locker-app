@@ -11,7 +11,6 @@ import { Text } from "./ui/text";
 interface FormData {
   name: string;
   registration: string;
-  locker_id: string;
   username: string;
 }
 
@@ -35,7 +34,6 @@ export function EditUserDialog({ isEditDialogOpen, setIsEditDialogOpen, user }: 
       await drizzleDb.update(users).set({
         name: data.name,
         registration: data.registration,
-        locker_id: data.locker_id,
         username: data.username
       }).execute();
     } catch (error) {
@@ -100,22 +98,6 @@ export function EditUserDialog({ isEditDialogOpen, setIsEditDialogOpen, user }: 
                   id="registration"
                   keyboardType="numeric"
                   placeholder="Matrícula"
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                />
-              )}
-            />
-          </View>
-          <View className="gap-2">
-            <Label htmlFor="locker">Armário</Label>
-            <Controller
-              control={control}
-              name="locker_id"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  id="locker"
-                  placeholder="Armário"
                   onChangeText={onChange}
                   onBlur={onBlur}
                   value={value}
